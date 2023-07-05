@@ -39,7 +39,7 @@ namespace ES.BS.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("buildingSystems");
+                    b.ToTable("BuildingSystemss");
                 });
 
             modelBuilder.Entity("ES.BS.Model.PersonDatabase", b =>
@@ -60,6 +60,20 @@ namespace ES.BS.DataAccessLayer.Migrations
                     b.HasKey("personId");
 
                     b.ToTable("PersonDet");
+                });
+
+            modelBuilder.Entity("ES.BS.Model.WorkerDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("workerDetailss");
                 });
 #pragma warning restore 612, 618
         }

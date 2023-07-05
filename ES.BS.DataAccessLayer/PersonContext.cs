@@ -9,7 +9,8 @@ namespace ES.BS.DataAccessLayer
         public PersonContext(DbContextOptions<PersonContext> options) : base(options) { }
 
         public DbSet<PersonDatabase> PersonDet { get; set; }
-        public DbSet<BuildingSystem> buildingSystems { get; set; }
+        public DbSet<BuildingSystem> BuildingSystemss { get; set; }
+        public DbSet<WorkerDetails> workerDetailss { get; set; }
 
     }
     

@@ -8,6 +8,6 @@ namespace ES.BS.Model
 {
     public class InsertWorkerRequest
     {
-        public int weight;
+        public int weight { get; set; }
     }
 }

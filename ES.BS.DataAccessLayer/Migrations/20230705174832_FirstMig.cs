@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ES.BS.DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class FirstMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "buildingSystems",
+                name: "BuildingSystemss",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -22,7 +22,7 @@ namespace ES.BS.DataAccessLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_buildingSystems", x => x.Id);
+                    table.PrimaryKey("PK_BuildingSystemss", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,16 +38,31 @@ namespace ES.BS.DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_PersonDet", x => x.personId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "workerDetailss",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    weight = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_workerDetailss", x => x.Id);
+                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "buildingSystems");
+                name: "BuildingSystemss");
 
             migrationBuilder.DropTable(
                 name: "PersonDet");
+
+            migrationBuilder.DropTable(
+                name: "workerDetailss");
         }
     }
 }

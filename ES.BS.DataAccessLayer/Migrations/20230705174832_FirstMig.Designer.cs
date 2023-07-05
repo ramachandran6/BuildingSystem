@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ES.BS.DataAccessLayer.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    [Migration("20230705062652_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20230705174832_FirstMig")]
+    partial class FirstMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace ES.BS.DataAccessLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("buildingSystems");
+                    b.ToTable("BuildingSystemss");
                 });
 
             modelBuilder.Entity("ES.BS.Model.PersonDatabase", b =>
@@ -63,6 +63,20 @@ namespace ES.BS.DataAccessLayer.Migrations
                     b.HasKey("personId");
 
                     b.ToTable("PersonDet");
+                });
+
+            modelBuilder.Entity("ES.BS.Model.WorkerDetails", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("workerDetailss");
                 });
 #pragma warning restore 612, 618
         }

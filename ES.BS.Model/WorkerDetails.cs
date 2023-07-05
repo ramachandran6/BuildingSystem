@@ -10,7 +10,7 @@ namespace ES.BS.Model
     public class WorkerDetails
     {
         [Key]
-        public Guid Id;
-        public int weight;
+        public Guid Id { get; set; }
+        public int weight { get; set; }
     }
 }
