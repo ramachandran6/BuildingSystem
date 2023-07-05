@@ -24,6 +24,20 @@ namespace ES.BS.DataAccessLayer.Migrations
                 {
                     table.PrimaryKey("PK_buildingSystems", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "PersonDet",
+                columns: table => new
+                {
+                    personId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    weight = table.Column<int>(type: "int", nullable: true),
+                    fromFloor = table.Column<byte>(type: "tinyint", nullable: true),
+                    toFloor = table.Column<byte>(type: "tinyint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PersonDet", x => x.personId);
+                });
         }
 
         /// <inheritdoc />
@@ -31,6 +45,9 @@ namespace ES.BS.DataAccessLayer.Migrations
         {
             migrationBuilder.DropTable(
                 name: "buildingSystems");
+
+            migrationBuilder.DropTable(
+                name: "PersonDet");
         }
     }
 }

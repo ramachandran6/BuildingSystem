@@ -4,19 +4,16 @@ using ES.BS.DataAccessLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace ES.BS.DataAccessLayer.Migrations
 {
-    [DbContext(typeof(BuildingDbContext))]
-    [Migration("20230704064858_FirstMigration")]
-    partial class FirstMigration
+    [DbContext(typeof(PersonContext))]
+    partial class PersonContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,6 +40,26 @@ namespace ES.BS.DataAccessLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("buildingSystems");
+                });
+
+            modelBuilder.Entity("ES.BS.Model.PersonDatabase", b =>
+                {
+                    b.Property<Guid>("personId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte?>("fromFloor")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte?>("toFloor")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int?>("weight")
+                        .HasColumnType("int");
+
+                    b.HasKey("personId");
+
+                    b.ToTable("PersonDet");
                 });
 #pragma warning restore 612, 618
         }

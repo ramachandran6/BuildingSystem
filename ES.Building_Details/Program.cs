@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BuildingDbContext>(options => options.UseSqlServer(
+builder.Services.AddDbContext<PersonContext>(options => options.UseSqlServer(
        builder.Configuration.GetConnectionString("nafTeam4")));
 
 var app = builder.Build();
