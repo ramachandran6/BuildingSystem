@@ -13,6 +13,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PersonContext>(options => options.UseSqlServer(
        builder.Configuration.GetConnectionString("nafTeam4")));
 
+builder.Services.AddCors(option =>
+        option.AddDefaultPolicy(policy =>
+        {
+            policy.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+        }
+        ));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +34,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors();
 app.MapControllers();
 
 app.Run();

@@ -28,7 +28,8 @@ namespace ES.Building_Details.Controllers
         [Route("/Building")]
         public async Task<IActionResult> AddBuildingDetails(InsertBuildingSystem ibs)
         {
-            if (ibs == null) {
+            if (ibs == null)
+            {
                 return BadRequest("enter valid details");
             }
             else
@@ -47,11 +48,12 @@ namespace ES.Building_Details.Controllers
             }
         }
 
+
         [HttpPut]
         [Route("/Building/{id:guid}")]
-        public async Task<IActionResult> UpdateBuildingDetails([FromRoute] Guid id,UpdateBuildingSystem ubs)
+        public async Task<IActionResult> UpdateBuildingDetails([FromRoute] Guid id, UpdateBuildingSystem ubs)
         {
-            if(ubs == null)
+            if (ubs == null)
             {
                 return BadRequest("Enter some valid details");
             }
@@ -75,16 +77,17 @@ namespace ES.Building_Details.Controllers
 
         [HttpDelete]
         [Route("/Building/{id:guid}")]
-        public async Task<IActionResult> DeleteBuilding([FromRoute] Guid id) { 
-        
-            if(id == null)
+        public async Task<IActionResult> DeleteBuilding([FromRoute] Guid id)
+        {
+
+            if (id == null)
             {
                 return BadRequest("enter valid id");
             }
             else
             {
                 var result = personDbContext.BuildingSystemss.FirstOrDefault(x => x.Id.Equals(id));
-                if(result == null)
+                if (result == null)
                 {
                     return BadRequest("Building id not found");
                 }
@@ -99,10 +102,10 @@ namespace ES.Building_Details.Controllers
 
         [HttpGet]
         [Route("/getNumberOfFloors/{name}")]
-         
+
         public async Task<IActionResult> GetNumberOfFloors([FromRoute] string name)
         {
-            if(name == null)
+            if (name == null)
             {
                 return BadRequest("enter the building name");
             }
@@ -110,7 +113,7 @@ namespace ES.Building_Details.Controllers
             {
                 var result = personDbContext.BuildingSystemss.FirstOrDefault(x => x.BuildingName.Equals(name));
 
-                if(result == null)
+                if (result == null)
                 {
                     return BadRequest("Building Name not found");
                 }

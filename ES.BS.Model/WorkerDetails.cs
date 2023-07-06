@@ -11,6 +11,7 @@ namespace ES.BS.Model
     {
         [Key]
         public Guid Id { get; set; }
+        public string BuildingName { get; set; }
         public int weight { get; set; }
     }
 }

@@ -43,6 +43,7 @@ namespace ES.Building_Details.Controllers
                 }
                 PersonDatabase pd = new PersonDatabase();
                 pd.personId = id;
+                pd.BuildingName = ipr.BuildingName;
                 pd.weight = result.weight;
                 //check with the floor range by adding building name in the person details
                 pd.fromFloor = ipr.fromFloor;
@@ -104,6 +105,21 @@ namespace ES.Building_Details.Controllers
 
             }
         }
+
+        [HttpGet]
+        [Route("/getBuildingName/{id:guid}")]
+        public async Task<IActionResult> GetBuildingName([FromRoute] Guid id)
+        {
+            if(id == Guid.Empty)
+            {
+                return BadRequest("Enter Valid Id");
+            }
+            else
+            {
+                return Ok(await personDbContext.workerDetailss.FirstOrDefaultAsync(x=> x.Id.Equals(id)));
+            }
+        }
+
         [HttpGet]
         [Route("/getWeight")]
         public async Task<IActionResult> GetPersonsWeight()
@@ -124,5 +140,7 @@ namespace ES.Building_Details.Controllers
                 return Ok(await personDbContext.PersonDet.FirstOrDefaultAsync(x => x.toFloor.Equals(floor_num)));
             }
         }
+
+        
     }
 }

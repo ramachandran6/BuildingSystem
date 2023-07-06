@@ -9,5 +9,6 @@ namespace ES.BS.Model
     public class UpdateWorkerRequest
     {
         public int weight { get; set; }
+        public string BuildingName { get; set; }
     }
 }

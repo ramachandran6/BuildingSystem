@@ -36,6 +36,13 @@ namespace ES.Building_Details.Controllers
                 wd.Id = new Guid();
                 wd.weight = iwr.weight;
 
+                var res = await personDbContext.BuildingSystemss.FirstOrDefaultAsync(x => x.BuildingName.Equals(iwr.BuildingName));
+
+                if(res == null)
+                {
+                    return BadRequest("Building Name not found");
+                }
+                wd.BuildingName = iwr.BuildingName;
                 await personDbContext.workerDetailss.AddAsync(wd);
                 await personDbContext.SaveChangesAsync();
                 return Ok(wd);
@@ -57,11 +64,13 @@ namespace ES.Building_Details.Controllers
                 {
                     return NotFound("Id not found");
                 }
+
                 if(uwr == null)
                 {
                     return BadRequest("enter valid details");
                 }
                 res.weight = uwr.weight;
+                res.BuildingName = uwr.BuildingName;
                 personDbContext.workerDetailss.Update(res);
                 await personDbContext.SaveChangesAsync();
 

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ES.BS.DataAccessLayer.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMig : Migration
+    public partial class firstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,7 @@ namespace ES.BS.DataAccessLayer.Migrations
                 columns: table => new
                 {
                     personId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     weight = table.Column<int>(type: "int", nullable: true),
                     fromFloor = table.Column<byte>(type: "tinyint", nullable: true),
                     toFloor = table.Column<byte>(type: "tinyint", nullable: true)
@@ -44,6 +45,7 @@ namespace ES.BS.DataAccessLayer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BuildingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     weight = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

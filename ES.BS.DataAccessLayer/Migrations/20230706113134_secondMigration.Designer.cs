@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ES.BS.DataAccessLayer.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    [Migration("20230705174832_FirstMig")]
-    partial class FirstMig
+    [Migration("20230706113134_secondMigration")]
+    partial class secondMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace ES.BS.DataAccessLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("BuildingName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<byte?>("fromFloor")
                         .HasColumnType("tinyint");
 
@@ -70,6 +73,10 @@ namespace ES.BS.DataAccessLayer.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BuildingName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("weight")
                         .HasColumnType("int");

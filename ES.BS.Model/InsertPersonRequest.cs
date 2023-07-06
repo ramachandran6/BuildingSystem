@@ -10,6 +10,7 @@ namespace ES.BS.Model
     {
         
         public byte? fromFloor { get; set; }
+        public string BuildingName { get; set; }
         public byte? toFloor { get; set; }
     }
 }
