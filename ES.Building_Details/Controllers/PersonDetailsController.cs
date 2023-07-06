@@ -43,16 +43,26 @@ namespace ES.Building_Details.Controllers
                 }
                 PersonDatabase pd = new PersonDatabase();
                 pd.personId = id;
-                pd.BuildingName = ipr.BuildingName;
-                pd.weight = result.weight;
-                //check with the floor range by adding building name in the person details
-                pd.fromFloor = ipr.fromFloor;
-                pd.toFloor = ipr.toFloor;
+                if (ipr.BuildingName.Equals(result.BuildingName))
+                {
+                    pd.weight = result.weight;
+                    //check with the floor range by adding building name in the person details
+                    pd.BuildingName = ipr.BuildingName;
+                    pd.fromFloor = ipr.fromFloor;
+                    pd.toFloor = ipr.toFloor;
+                    var building = await personDbContext.BuildingSystemss.FirstOrDefaultAsync(x=> x.BuildingName.Equals(ipr.BuildingName));
+                    if(ipr.fromFloor > building.NoOfFloors || ipr.fromFloor < 0 || ipr.toFloor > building.NoOfFloors || ipr.toFloor < 0)
+                    {
+                        return BadRequest("Floor should be between 0 and " + building.NoOfFloors);
+                    }
 
-                await personDbContext.PersonDet.AddAsync(pd);
-                await personDbContext.SaveChangesAsync();
+                    await personDbContext.PersonDet.AddAsync(pd);
+                    await personDbContext.SaveChangesAsync();
 
-                return Ok(pd);
+                    return Ok(pd);
+                }
+                return BadRequest("Person belongs to "+result.BuildingName);
+                
             }
         }
 
@@ -141,7 +151,26 @@ namespace ES.Building_Details.Controllers
                 return Ok(await personDbContext.PersonDet.FirstOrDefaultAsync(x => x.toFloor.Equals(floor_num)));
             }
         }
+        [HttpDelete]
+        [Route("/deletePersons/{floor_num}")]
+        public async Task<IActionResult> DeletePersons([FromRoute] byte floor_num)
+        {
+            if (float.IsNaN(floor_num))
+            {
+                return BadRequest("enter valid number");
+            }
+            else
+            {
+                //var res = personDbContext.PersonDet.Select(x => x.toFloor == (floor_num));
+                var rc = from person in personDbContext.PersonDet where person.toFloor == floor_num select person;
+                foreach (var item in rc)
+                {
+                    var res = await personDbContext.PersonDet.FirstOrDefaultAsync(x => x.personId.Equals(item.personId));
+                    personDbContext.PersonDet.Remove(res);
+                }
+                return Ok(rc);
+            }
+        }
 
-        
     }
 }
