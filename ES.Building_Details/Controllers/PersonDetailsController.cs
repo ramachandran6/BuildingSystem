@@ -165,8 +165,8 @@ namespace ES.Building_Details.Controllers
                 var rc = from person in personDbContext.PersonDet where person.toFloor == floor_num select person;
                 foreach (var item in rc)
                 {
-                    var res = await personDbContext.PersonDet.FirstOrDefaultAsync(x => x.personId.Equals(item.personId));
-                    personDbContext.PersonDet.Remove(res);
+                    //var res = await personDbContext.PersonDet.FirstOrDefaultAsync(x => x.personId.Equals(item.personId));
+                    personDbContext.PersonDet.Remove(item);
                 }
                 return Ok(rc);
             }
