@@ -127,7 +127,7 @@ namespace ES.Building_Details.Controllers
             else
             {
                 var result = await personDbContext.workerDetailss.FirstOrDefaultAsync(x => x.Id.Equals(id));
-                return Ok(result.BuildingName);
+                return Ok(result);
             }
         }
 

@@ -111,8 +111,8 @@ namespace ES.Building_Details.Controllers
             }
             else
             {
+                //var result = personDbContext.BuildingSystemss.FirstOrDefault(x => string.Equals(x.BuildingName, name,StringComparison.OrdinalIgnoreCase));
                 var result = personDbContext.BuildingSystemss.FirstOrDefault(x => x.BuildingName.Equals(name));
-
                 if (result == null)
                 {
                     return BadRequest("Building Name not found");
@@ -146,6 +146,13 @@ namespace ES.Building_Details.Controllers
                 return Ok(status);
             }
 
+        }
+
+        [HttpGet]
+        [Route("/getBuildingNames")]
+        public async Task<IActionResult> GetBuildingNames()
+        {
+            return Ok(personDbContext.BuildingSystemss.Select(x => x.BuildingName));
         }
 
     }
